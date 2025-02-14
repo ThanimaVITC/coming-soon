@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            flex-direction: column;
+        }
+        #sub-text {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        #typing-text {
+            font-size: 2.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid white;
+            margin-top: 5px;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starCanvas"></canvas>
+    <div id="sub-text">Visiton leaderboards</div>
+    <div id="typing-text"></div>
+
+    <script>
+        const text = "COMING SOON";
+        let index = 0;
+        function typeEffect() {
+            if (index < text.length) {
+                document.getElementById("typing-text").textContent += text.charAt(index);
+                index++;
+                setTimeout(typeEffect, 150);
+            } else {
+                setTimeout(() => {
+                    document.getElementById("typing-text").textContent = "";
+                    index = 0;
+                    typeEffect();
+                }, 2000);
+            }
+        }
+        typeEffect();
+
+        const canvas = document.getElementById("starCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.speed = Math.random() * 4 + 2;
+            }
+            update() {
+                this.x -= this.speed;
+                this.y += this.speed;
+                if (this.x < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = "white";
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+        }
+
+        const stars = Array.from({ length: 50 }, () => new Star());
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
