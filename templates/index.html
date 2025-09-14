@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -32,6 +33,36 @@
             border-right: 3px solid white;
             margin-top: 5px;
         }
+        .social-links {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px;
+            z-index: 1;
+        }
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #ffeb3b;
+            transform: translateY(-5px);
+        }
+        .social-links i {
+            font-size: 24px;
+        }
+        @media (max-width: 768px) {
+            .social-links {
+                bottom: 20px;
+                gap: 20px;
+            }
+            .social-links i {
+                font-size: 20px;
+            }
+        }
         canvas {
             position: absolute;
             top: 0;
@@ -43,6 +74,18 @@
     <canvas id="starCanvas"></canvas>
     <div id="sub-text">Thanima VIT Chennai</div>
     <div id="typing-text"></div>
+    
+    <div class="social-links">
+        <a href="https://www.instagram.com/thanimavitc//" target="_blank" title="Follow us on Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/thanima-literary-club" target="_blank" title="Connect with us on LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="mailto:thanimamalayalamliteraryclub@gmail.com" title="Email us">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    </div>
 
     <script>
         const text = "COMING SOON";
@@ -74,7 +117,7 @@
             reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height * 0.5;
-                this.size = Math.random() * 2 + 1;
+                this.size = Math.random() * 5 + 1;
                 this.speed = Math.random() * 4 + 2;
             }
             update() {
