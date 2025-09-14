@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 - Page Not Found</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="/templates/icon/favicon.ico">
+   <link rel="icon" href="{{ url_for('static', filename='icon/favicon.ico') }}">
   <style>
     body {
       margin: 0;
@@ -28,7 +28,7 @@
       z-index: -1;
     }
     h1 {
-      font-size: 6rem;
+      font-size: 2.5rem;
       font-weight: 700;
       letter-spacing: 5px;
       animation: glitch 1s infinite;
@@ -42,9 +42,9 @@
       100% { text-shadow: none; }
     }
     p {
-      font-size: 1.2rem;
+      font-size: .8rem;
       opacity: 0.8;
-      margin: 10px 0 20px 0;
+      margin: -20px 0 10px 0;
     }
     a {
       text-decoration: none;
